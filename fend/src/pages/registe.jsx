@@ -16,10 +16,11 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:6968/departments', formData);
+      await axios.post("http://localhost:6968/departments", formData);
       alert('Registered successfully!');
       navigate('/')
     } catch (err) {
+      console.log("eroor is",error)
       console.error(err);
       alert('Error during registration');
     }

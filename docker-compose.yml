@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./demo
+    ports:
+      - "6968:6968"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/dcbapp
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=yourpassword
+    depends_on:
+      - db
+
+  frontend:
+    build: ./fend
+    ports:
+      - "3000:80"   # nginx serves frontend on port 80, mapped to 3000 on host
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: yourpassword
+      MYSQL_DATABASE: dcbapp
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
