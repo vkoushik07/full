@@ -1,15 +1,18 @@
+
 pipeline {
     agent any
 
     environment {
         BACKEND_DIR = 'demo'
         FRONTEND_DIR = 'fend'
+        NODE_PATH = '/home/venkat-koushik/.nvm/versions/node/v22.15.1/bin/node'
+
+        NPM_PATH = '/home/venkat-koushik/.nvm/versions/node/v22.15.1/bin/npm'
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                // This clones the entire repo including Jenkinsfile
                 git branch: 'main', url: 'https://github.com/vkoushik07/full.git'
             }
         }
@@ -18,8 +21,6 @@ pipeline {
             steps {
                 dir("${BACKEND_DIR}") {
                     sh 'mvn clean install'
-                    // Run Spring Boot (optional, usually done only in deploy stage)
-                    // sh 'mvn spring-boot:run'
                 }
             }
         }
@@ -27,7 +28,7 @@ pipeline {
         stage('Install Frontend') {
             steps {
                 dir("${FRONTEND_DIR}") {
-                    sh 'npm install'
+                    sh "${NPM_PATH} install"
                 }
             }
         }
@@ -35,7 +36,7 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 dir("${FRONTEND_DIR}") {
-                    sh 'npm run dev'  // Or `npm start` or `npm run dev` depending on your app
+                    sh "${NPM_PATH} run dev"
                 }
             }
         }
@@ -50,4 +51,3 @@ pipeline {
         }
     }
 }
-
