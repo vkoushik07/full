@@ -8,7 +8,7 @@ pipeline {
     environment {
         BACKEND_DIR = 'demo'
         FRONTEND_DIR = 'fend'
-        BACKEND_PORT = '8080' // Spring Boot default port
+        BACKEND_PORT = '6968' // Spring Boot default port
         FRONTEND_PORT = '3000' // React default port
     }
 
