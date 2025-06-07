@@ -29,8 +29,8 @@ nodejs "Nodejs"
 
     stage('Docker Compose Up') {
       steps {
-        sh 'docker-compose down || true' // Stop any existing containers
-        sh 'docker-compose up --build -d' // Rebuild and run containers
+        sh 'docker compose down || true' // Stop any existing containers
+        sh 'docker compose up --build -d' // Rebuild and run containers
       }
     }
 
