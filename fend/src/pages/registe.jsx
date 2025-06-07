@@ -20,8 +20,8 @@ function Register() {
       alert('Registered successfully!');
       navigate('/')
     } catch (err) {
-      console.log("eroor is",error)
-      console.error(err);
+      console.log("eroor is",err)
+      c
       alert('Error during registration');
     }
   };
