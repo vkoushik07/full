@@ -22,9 +22,9 @@ pipeline {
         stage('Build & Run Backend') {
             steps {
                 dir("${BACKEND_DIR}") {
-                    sh 'mvn clean package'
+                    // sh 'mvn clean package'
                     // Run in background and keep process running after pipeline ends
-                    sh 'nohup java -jar target/*.jar &'
+                    sh 'nohup mvn spring-boot:run &'
                 }
             }
         }
@@ -41,7 +41,8 @@ pipeline {
             steps {
                 dir("${FRONTEND_DIR}") {
                     // Run in background and keep process running after pipeline ends
-                    sh 'nohup npm run dev &'
+                    sh 'nohup npm run dev -- --host 0.0.0.0 > frontend.log 2>&1 &'
+
                 }
             }
         }
